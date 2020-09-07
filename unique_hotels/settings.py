@@ -145,8 +145,11 @@ LOGIN_URL = 'login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-#Load local settings
-from .local_settings import *
+# Load local settings
+# try:
+#    from .local_settings import *
+# except ImportError:
+#     raise Exception('A local_settings.py file is required to run this project')
 
 SECRET_KEY = os.getenv('SECRET_KEY', SECRET_KEY)
 
