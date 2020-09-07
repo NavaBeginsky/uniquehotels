@@ -44,7 +44,7 @@ Flask-Security-Too==3.4.2
 Flask-SQLAlchemy==2.1
 Flask-WTF==0.14.2
 future==0.18.2
-GDAL==3.0.4
+# GDAL==3.0.4
 google-api-python-client==1.7.11
 google-auth==1.5.1
 google-auth-httplib2==0.0.3
