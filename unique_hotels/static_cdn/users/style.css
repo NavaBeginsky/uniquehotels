@@ -1,0 +1,29 @@
+.registration-box{
+    padding-top: 1.25em;
+    background-color: rgba(225, 242, 252, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 3px grey solid;
+    border-radius: 6px;
+    width: 400px;
+}
+
+.center-registration{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.registration-box form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.submit{
+    margin: 15px;
+}

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'hotels/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'user_profile/style.css' %}">
+{% endblock %}
+{% block content %}
+<h2 class='profile-header'>Loved Hotels</h2>
+<div class='profile-page'>
+    {% include 'partials/hotel_filters.html' %}
+    {% if object_list %}
+    <div class='profile-hotels'>
+        {% for hotel in object_list %}
+        {% include 'partials/hotelcards.html' with current_page='profile' %}
+        {% endfor %}
+    </div>
+    <div id='map'></div>
+    {% else %}
+    <p class='no-hotels'>Oh no! There are no hotels yet... Try clearing your filters or <a
+            href='{% url "show_hotels" %}'>check out more hotels.</a></p>
+    {% endif %}
+
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $(".like_unlike").submit(function (e) {
+        e.preventDefault();
+        $(this).find(".like-button").toggleClass('red');
+        var serializedData = $(this).serialize();
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'like_unlike' %}",
+            data: serializedData,
+            error: function (response) {
+                console.log(response["responseJSON"]["error"]);
+            }
+        })
+    })
+</script>
+<script>
+    // Initialize and add the map
+    function initMap() {
+        let israel = { lat: 31.5699505, lng: 34.5143476 };
+        let map = new google.maps.Map(
+            document.getElementById('map'), { zoom: 7, center: israel });
+        '{% autoescape off %}'
+        for (info of {{ map_info }}) {
+            let contentImgSource = info[4];
+            let contentTitle = info[2];
+            let contentDescription = info[3];
+            const infowindow = new google.maps.InfoWindow({
+                content: `<div><img class='map-image' src="${contentImgSource}"></div><div style = 'font-weight: bold; padding: 10px;'>${contentTitle}</div><div style= 'padding: 10px;'>${contentDescription}</div>`
+            });
+            let marker = new google.maps.Marker({
+                position: { lat: info[0], lng: info[1] },
+                map: map,
+                title: info[2]
+            });
+            '{% endautoescape %}'
+            marker.addListener("click", () => {
+                infowindow.open(map, marker);
+            });
+        }        
+    }
+</script>
+<script defer src="http://maps.googleapis.com/maps/api/js?key={{apikey}}&callback=initMap">
+</script>
+<script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(addPositionToRequest);
+        } 
+     }
+
+    function addPositionToRequest(position) {
+        var lat_field = document.getElementById("id_lat");
+        var lon_field = document.getElementById("id_lon");
+        lat_field.setAttribute('value', position.coords.latitude) 
+        lon_field.setAttribute('value', position.coords.longitude) 
+    }
+</script>
+{% endblock javascript %}

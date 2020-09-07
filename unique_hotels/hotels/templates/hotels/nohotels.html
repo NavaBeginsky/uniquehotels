@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'hotels/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include 'partials/hotel_filters.html' %}
+{% if user.is_authenticated %} 
+    <h3>Sorry! We seem to have run out of hotels. Try resetting your filters or click on the button to check out the ones you've already favorited or reset your filters for more results!</h3>
+    <a class='btn btn-secondary' href="{% url 'profile' user.username %}">Take me to my loved hotels</a>
+{% else %}
+    <h3>Sorry! We seem to have run out of hotels in your area. Try resetting your filters.</h3>
+{% endif %}
+{% endblock %}

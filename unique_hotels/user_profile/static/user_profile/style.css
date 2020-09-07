@@ -1,0 +1,155 @@
+.red {
+    color: red;
+}
+
+.profile-hotels{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start
+}
+
+.profile-page{
+    width: 100vw;
+    /* height: 100vh; */
+}
+
+#map{
+    width: 700px;
+    height: 500px;
+    display: block;
+    margin: auto;
+}
+
+.map-image{
+    float:left;
+    width: 150px;
+    height: 115px;
+    padding-right: 10px;
+}
+
+.profile-page .hotel-card{
+    width: 500px;
+    /* display: inline-block; */
+    margin: 20px;
+}
+
+.hotel-img{
+    height: 350px;
+}
+
+.hotel-unique-desc{
+    height: 200px;
+}
+
+.edit-profile-form{
+    display: flex;
+    justify-content: center;
+}
+
+.buttons{
+    display: inline-block;
+}
+
+.delete-form{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.delete-page{
+    display: flex;
+    justify-content: center;
+}
+
+.no-hotels{
+    margin-left: 23px;
+    font-weight: bold;
+}
+
+.profile-settings{
+    margin-top: 20px;
+}
+
+.change-photo{
+    display: flex;
+    width: 300px;
+    align-items: center;
+    flex-direction: column;
+}
+
+.photo-form{
+    margin-bottom: 15px;
+}
+
+.photo-form + form table{
+    position: relative;
+    right: 20px;
+}
+
+.avatar-profile{
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+}
+
+.submit, .delete-btn{
+    width: 150px;
+    align-self: center;
+}
+
+.profile-settings{
+    border-right: 1px lightgrey solid;
+    border-bottom: 1px lightgrey solid;
+    padding-left: 20px;
+    width: 420px;
+    padding-bottom: 30px;
+}
+
+.profile-settings form{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+}
+
+.profile-settings form th{
+    width: 120px;
+
+}
+
+.delete-btn{
+    margin-top: 5px;
+}
+
+.messages{
+    align-self: flex-start;
+}
+
+.like_unlike{
+    margin-bottom: 8px;
+}
+
+.profile-header{
+    margin-top: 15px;
+}
+
+@media screen and (max-width: 768px){
+
+    .card-footer{
+        padding: 10px;
+    }
+
+    #map{
+        width: 500px;
+        height: 400px;
+        display: block;
+        margin: auto;
+    }
+
+    .map-image{
+        float:left;
+        width: 100px;
+        height: 85px;
+        padding-right: 10px;
+    }
+
+}

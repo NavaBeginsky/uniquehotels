@@ -1,0 +1,15 @@
+{% extends "./edit_profile_base.html" %}
+
+{% block details %}active{% endblock %}
+{% block before_form %}
+
+    <a href="{% url 'update_profile_pic' %}" class='change-photo'>
+        <img class='avatar-profile' src='{{ user.userprofilepic.profile_pic.url }}' alt='profile picture'> 
+        <p>Change Profile Picture</p>
+    </a>
+
+{% endblock %}
+
+{% block after_form %}
+<a href="{% url 'delete_account' %}" class='btn btn-danger delete-btn'>Delete Account</a>
+{% endblock %}

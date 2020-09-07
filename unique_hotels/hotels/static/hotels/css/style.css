@@ -1,0 +1,68 @@
+.hotels-main .hotel-card .hotel-img{
+    max-height: 500px;
+}
+
+.choice{
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+}
+
+.skip-form{
+    display: inline-block;
+}
+
+.card ul{
+    list-style-type: circle;
+}
+
+.hotels-main form{
+    padding-left: 0;
+}
+
+.filter-submit{
+    padding: 6px;
+}
+
+.pull-left{
+    float: left;
+}
+
+.filter-toggle{
+    margin-top: 5px;
+}
+
+#id_radius{
+    margin: 5px;
+    width: 150px;
+    display: inline-block;
+}
+#hotel-card.swiperight{
+    transition: right 0.5s ease;
+}
+    
+@media screen and (min-width: 768px){
+    .hotel-card{
+        width:1000px;
+    } 
+
+    .filters{
+        margin: 3px;
+    }
+
+}
+
+@media screen and (max-width: 768px){
+    .filter-label{
+        display: none;
+    }
+
+    .card-footer{
+        padding: 15px;
+    }
+
+    .filter-submit{
+        margin-top: 5px;
+    }
+
+}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'user_profile/style.css' %}">
+{% endblock %}
+{% block content %}
+
+    <h1 class='profile-header'>Update Profile</h1>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+        <a class="nav-link {% block details %}{% endblock %}" href="{% url 'update_profile' %}">User Details</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link {% block photo %}{% endblock %}" href="{% url 'update_profile_pic' %}">Profile Photo</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link {% block password %}{% endblock %}" href="{% url 'change_password' %}">Password</a>
+        </li>
+    </ul>
+    <div class='profile-settings'>
+        {% block before_form %}{% endblock %}
+        {% include "../partials/forms.html" %}
+        {% block after_form %}{% endblock %}
+    </div>
+
+{% endblock %}

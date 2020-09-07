@@ -1,0 +1,82 @@
+<div class="card hotel-card" id='hotel-card' draggable="true">
+    <h5 class="card-header">{{ hotel.name }}</h5>
+    <div id="carouselControls-{{ forloop.counter }}" class="carousel slide card-img-top" data-ride="carousel">
+        <div class="carousel-inner">
+            {% for photo in hotel.hotelphotos_set.all %}
+                {% if photo == hotel.hotelphotos_set.all.0 %}
+                    <div class="carousel-item active">
+                {% else %}
+                    <div class="carousel-item">
+                {% endif %}
+                        <img src="{{ photo.image.url }}" class="d-block w-100 img-responsive hotel-img" alt="{{ hotel.name }}">
+                    </div>
+            {% endfor %}
+        </div>
+        <a class="carousel-control-prev" href="#carouselControls-{{ forloop.counter }}" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselControls-{{ forloop.counter }}" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <div class="card-body text-center hotel-unique-desc">
+        <p class="card-text">{{ hotel.unique_snippet }}</p>
+    </div>
+    {% if current_page != 'profile' %}
+    <div class="card-body text-center">
+        <form method='POST'>
+            {% csrf_token %}
+            <input type='hidden' name='hotel_pk' value='{{ hotel.pk }}'>
+            <button type='submit' name='reject' class='reject-button choice float-left' id='reject'><i class="fas fa-times"></i></button>
+        </form>
+        <form method='POST' class='skip-form'>
+            {% csrf_token %}
+            <input type='hidden' name='hotel_pk' value='{{ hotel.pk }}'>
+            <button type='submit' name='skip' class='skip-button choice'><i class="fas fa-forward"></i></button>
+        </form>
+        <form method='POST' class='float-right'>
+            {% csrf_token %}
+            <input type='hidden' name='hotel_pk' value='{{ hotel.pk }}'>
+            <button type='submit' name='like' class='like-button choice'><i class="far fa-heart" id='like_heart'></i></button>
+        </form>
+    </div>
+    <!-- check if logged in as self when viewing the profile page -->
+    {% elif self %}
+        <form method='POST' class='text-center like_unlike'>
+            {% csrf_token %}
+            <input type='hidden' name='hotel_pk' value='{{ hotel.pk }}'>
+            <button type='submit' name='like' class='like-button choice red'><i class="fas fa-heart"></i></button>
+        </form>
+    {% endif %}
+
+    <div class="card-footer">
+        <a class="btn btn-primary" data-toggle="collapse" href="#moreDetails-{{ forloop.counter }}" role="button"
+            aria-expanded="false">More Details</a>
+        <a href="{{ hotel.booking_website }}" target='_blank' class="btn btn-secondary float-right">Check Availability and Rates</a>
+    </div>
+
+    <div class="collapse" id="moreDetails-{{ forloop.counter }}">
+        <div class="card card-body">
+            <h3>About {{ hotel.name }}:</h3>
+            <p>{{ hotel.details }}</p>
+            {% if hotels.amenities_set.all != '[]' %}
+            <h3>Amenities:</h3>
+            <ul>
+                {% for amenity in hotel.amenities_set.all %}
+                <li>{{ amenity }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% if hotels.categories_set.all != '[]' %}
+            <h3>Categories:</h3>
+            <ul>
+                {% for category in hotel.categories_set.all %}
+                <li>{{ category }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>

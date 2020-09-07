@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'hotels/css/style.css' %}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.19/jquery.touchSwipe.min.js"
+    integrity="sha512-YYiD5ZhmJ0GCdJvx6Xe6HzHqHvMpJEPomXwPbsgcpMFPW+mQEeVBU6l9n+2Y+naq+CLbujk91vHyN18q6/RSYw=="
+    crossorigin="anonymous"></script>
+<script src="http://code.jquery.com/ui/1.8.17/jquery-ui.min.js"></script>
+{% endblock %}
+{% block content %}
+
+<div id='hotels-main' class='hotels-main container'>
+    {% include 'partials/hotel_filters.html' %}
+    {% include 'partials/hotelcards.html' with current_page='home' %}
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>$('#hotel-card').draggable();</script>
+<script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(addPositionToRequest);
+        }
+    }
+
+    function addPositionToRequest(position) {
+        var lat_field = document.getElementById("id_lat");
+        var lon_field = document.getElementById("id_lon");
+        lat_field.setAttribute('value', position.coords.latitude)
+        lon_field.setAttribute('value', position.coords.longitude)
+    }
+</script>
+
+<script>
+        $("#hotel-card").swipe({
+
+            swipeRight: function (event, direction) {
+                $( "#hotel-card" ).animate({
+                    left: "50px",
+                    top: "10px"
+                }, 75, function() {
+                    // Animation complete.
+                    $("#like_heart").click();
+                });
+                
+                
+            },
+            swipeLeft: function (event, direction) {
+                $( "#hotel-card" ).animate({
+                    right: "50px",
+                    top: "10px"
+                }, 75, function() {
+                    // Animation complete.
+                    $("#reject").click();
+                });
+                
+                
+            },
+            excludedElements: '.carousel',
+            threshold:75
+        });
+</script>
+
+{% endblock %}

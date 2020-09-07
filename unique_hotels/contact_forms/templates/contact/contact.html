@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'contact_forms/style.css' %}">
+{% endblock %}
+{% block content %}
+    <h2>Contact:</h2>
+    {% include 'partials/forms.html' %}
+{% endblock %}

@@ -1,0 +1,37 @@
+<form method="GET" class="py-3 navbar navbar-expand-lg navbar-light">
+    <button class="navbar-toggler pull-left" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span>Filter by</span>
+    </button>
+    <div class="collapse navbar-collapse filter-toggle" id="navbarNavDropdown">
+        <span class='filters filter-label'>Filter by:</span>
+        <div class="dropdown filters navbar-nav">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Categories
+            </button>
+            <div class="dropdown-menu">
+                    {{ cat_form }}
+            </div>
+        </div>
+        <div class="dropdown filters navbar-nav">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Amenities
+            </button>
+            <div class="dropdown-menu">
+                    {{ amen_form }}
+            </div>
+        </div>
+        <div class="dropdown filters navbar-nav">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick='getLocation()'>
+                Distance
+            </button>
+            <div class="dropdown-menu">
+                {{ dist_form.radius.label}}:
+                {{ dist_form.lat.as_hidden }}
+                {{ dist_form.lon.as_hidden }}
+                {{ dist_form.radius }}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary filters filter-submit navbar-nav">Submit</button>
+    </div>
+</form>
+
