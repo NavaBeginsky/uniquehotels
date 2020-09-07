@@ -117,7 +117,7 @@ sshtunnel==0.1.4
 systemd-python==234
 toml==0.10.1
 # ubuntu-advantage-tools==20.3
-ubuntu-drivers-common==0.0.0
+# ubuntu-drivers-common==0.0.0
 ufw==0.36
 unattended-upgrades==0.1
 uritemplate==0.6
