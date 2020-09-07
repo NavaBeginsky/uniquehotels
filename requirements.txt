@@ -25,6 +25,7 @@ dj-database-url==0.5.0
 Django==3.1
 django-crispy-forms==1.9.2
 django-filter==2.3.0
+django-heroku==0.3.1
 django-map-widgets==0.3.0
 djangorestframework==3.11.1
 # duplicity==0.8.12.0
