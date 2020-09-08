@@ -179,7 +179,11 @@ DATABASES = {
     }
 }
 
-GDAL_LIBRARY_PATH = os.getenv('GDAL_LIBRARY_PATH')
-GEOS_LIBRARY_PATH = os.getenv('GEOS_LIBRARY_PATH')
+# GDAL_LIBRARY_PATH = os.getenv('GDAL_LIBRARY_PATH')
+# GEOS_LIBRARY_PATH = os.getenv('GEOS_LIBRARY_PATH')
+
+GEOS_LIBRARY_PATH = '/app/.geodjango/geos/lib/libgeos_c.so'
+
+GDAL_LIBRARY_PATH = '/app/.geodjango/gdal/lib/libgdal.so'
 
 django_heroku.settings(locals())
