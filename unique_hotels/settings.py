@@ -145,13 +145,15 @@ LOGIN_URL = 'login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# Load local settings
-# try:
-#    from .local_settings import *
-# except ImportError:
-#     raise Exception('A local_settings.py file is required to run this project')
+# #Load local settings
+if os.getenv('SECRET_KEY'):
+    SECRET_KEY = os.getenv('SECRET_KEY')
+else:
+    try:
+    from .local_settings import *
+    except ImportError:
+        raise Exception('A local_settings.py file is required to run this project')
 
-SECRET_KEY = os.getenv('SECRET_KEY')
 
 MAP_WIDGETS = {
     "GooglePointFieldWidget": (
@@ -159,7 +161,7 @@ MAP_WIDGETS = {
         ("mapCenterLocation", [31.5699505, 34.5143476]),
         ("markerFitZoom", 12),
     ),
-    "GOOGLE_MAP_API_KEY": os.getenv('SECRET_KEY')
+    "GOOGLE_MAP_API_KEY": os.getenv('GOOGLE_API')
 }
 
 # Add configuration for static files storage using whitenoise
