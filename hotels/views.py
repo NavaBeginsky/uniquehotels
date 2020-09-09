@@ -3,7 +3,7 @@ from .models import Hotels, HotelPhotos
 from random import choice
 from django.contrib.auth.decorators import login_required
 from users import models
-from .forms import CategoryForm, AmenityForm, LocationForm
+# from .forms import CategoryForm, AmenityForm, LocationForm
 from django.contrib.gis.geos import GEOSGeometry
 from django.contrib.gis.measure import D
 
@@ -56,24 +56,24 @@ def show_hotels(request):
         elif 'skip' not in request.POST:  # user should be able to skip through hotels even if not logged in
             return redirect('login')
     
-    locationForm = LocationForm(request.GET)
-    if locationForm.is_valid():#the only form that takes a user input so it needs to be cleaned
-        if 'lat' in request.GET and 'radius' in request.GET:
-            lat = locationForm.cleaned_data['lat']
-            lon = locationForm.cleaned_data['lon']
-            distance = locationForm.cleaned_data['radius']
-        else:
-            lat, lon, distance = None, None, None
-    chosen_hotel = choose_hotel(current_user, request.GET.getlist('categories'), request.GET.getlist('amenities'), lat, lon, distance)
+    # locationForm = LocationForm(request.GET)
+    # if locationForm.is_valid():#the only form that takes a user input so it needs to be cleaned
+    #     if 'lat' in request.GET and 'radius' in request.GET:
+    #         lat = locationForm.cleaned_data['lat']
+    #         lon = locationForm.cleaned_data['lon']
+    # #         distance = locationForm.cleaned_data['radius']
+    #     else:
+    #         lat, lon, distance = None, None, None
+    # chosen_hotel = choose_hotel(current_user, request.GET.getlist('categories'), request.GET.getlist('amenities'), lat, lon, distance)
     
     context = {
-        'hotel': chosen_hotel,
-        'cat_form': CategoryForm(request.GET),
-        'amen_form': AmenityForm(request.GET),
-        'dist_form': LocationForm(request.GET)
+        # 'hotel': chosen_hotel,
+        # 'cat_form': CategoryForm(request.GET),
+        # 'amen_form': AmenityForm(request.GET),
+        # 'dist_form': LocationForm(request.GET)
     }
 
-    if chosen_hotel == False:
-        return render(request, 'hotels/nohotels.html', context)
+    # if chosen_hotel == False:
+    #     return render(request, 'hotels/nohotels.html', context)
 
     return render(request, 'hotels/showhotels.html', context)

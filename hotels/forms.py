@@ -1,5 +1,5 @@
 from django import forms
-from .models import Categories, Amenities
+# from .models import Categories, Amenities
 
 # class CategoryForm(forms.Form):
 #     category_options = Categories.objects.all().values_list('pk', 'name')
