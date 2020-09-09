@@ -145,24 +145,7 @@ LOGIN_URL = 'login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# #Load local settings
-if os.getenv('SECRET_KEY'):
-    SECRET_KEY = os.getenv('SECRET_KEY')
 
-    # import dj_database_url
-    # DATABASES = { 'default' : dj_database_url.config()}
-
-    DATABASES = {
-        "default": {
-            "ENGINE": 'django.contrib.gis.db.backends.postgis',
-        }
-    }
-
-else:
-    try:
-        from .local_settings import *
-    except ImportError:
-        raise Exception('A local_settings.py file is required to run this project')
 
 
 MAP_WIDGETS = {
@@ -186,3 +169,16 @@ GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH')
 
 
 django_heroku.settings(locals())
+
+if os.getenv('SECRET_KEY'):
+    SECRET_KEY = os.getenv('SECRET_KEY')
+
+    import dj_database_url
+    DATABASES = { 'default' : dj_database_url.config()}
+    DATABASES['default']['ENGINE'] = "django.contrib.gis.db.backends.postgis"
+
+else: #Load local settings
+    try:
+        from .local_settings import *
+    except ImportError:
+        raise Exception('A local_settings.py file is required to run this project')
