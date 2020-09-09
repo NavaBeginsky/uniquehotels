@@ -10,7 +10,7 @@ from django.utils.decorators import method_decorator
 from .models import UserProfilePic
 from django.contrib.auth.views import PasswordChangeView
 from hotels.views import filter_hotels
-from hotels.forms import CategoryForm, AmenityForm, LocationForm
+# from hotels.forms import CategoryForm, AmenityForm, LocationForm
 from django.http import JsonResponse
 from django.core.serializers import serialize
 from django.conf import settings
@@ -68,32 +68,32 @@ class DeleteAccount(DeleteView):
         return self.request.user
 
 
-class UserProfile(ListView):
-    template_name = 'user_profile/profile.html'
+# class UserProfile(ListView):
+#     template_name = 'user_profile/profile.html'
     
-    def get_queryset(self):
-        self.user_profile = get_object_or_404(User, username=self.kwargs['username'])
-        locationForm = LocationForm(self.request.GET)
-        lat, lon, distance = None, None, None
-        if locationForm.is_valid():#the only form that takes a user input so it needs to be cleaned
-            if 'lat' in self.request.GET and 'radius' in self.request.GET:
-                lat = locationForm.cleaned_data['lat']
-                lon = locationForm.cleaned_data['lon']
-                distance = locationForm.cleaned_data['radius']
+#     def get_queryset(self):
+#         self.user_profile = get_object_or_404(User, username=self.kwargs['username'])
+#         locationForm = LocationForm(self.request.GET)
+#         lat, lon, distance = None, None, None
+#         if locationForm.is_valid():#the only form that takes a user input so it needs to be cleaned
+#             if 'lat' in self.request.GET and 'radius' in self.request.GET:
+#                 lat = locationForm.cleaned_data['lat']
+#                 lon = locationForm.cleaned_data['lon']
+#                 distance = locationForm.cleaned_data['radius']
 
-        hotels = filter_hotels(self.user_profile.liked.all(), self.request.GET.getlist('categories'), self.request.GET.getlist('amenities'), lat, lon, distance)
-        return hotels
+#         hotels = filter_hotels(self.user_profile.liked.all(), self.request.GET.getlist('categories'), self.request.GET.getlist('amenities'), lat, lon, distance)
+#         return hotels
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)        
-        context['cat_form'] = CategoryForm(self.request.GET)
-        context['amen_form'] = AmenityForm(self.request.GET)
-        context['dist_form'] = LocationForm(self.request.GET)
-        context['self'] = True if self.request.user == self.user_profile else False
-        context['apikey'] = settings.GOOGLE_API
-        if context['object_list']:
-            context['map_info'] = [([float(hotel.coordinates.lat), float(hotel.coordinates.lon), hotel.name, hotel.unique_snippet, hotel.hotelphotos_set.first().image.url]) for hotel in context['object_list']]
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)        
+#         context['cat_form'] = CategoryForm(self.request.GET)
+#         context['amen_form'] = AmenityForm(self.request.GET)
+#         context['dist_form'] = LocationForm(self.request.GET)
+#         context['self'] = True if self.request.user == self.user_profile else False
+#         context['apikey'] = settings.GOOGLE_API
+#         if context['object_list']:
+#             context['map_info'] = [([float(hotel.coordinates.lat), float(hotel.coordinates.lon), hotel.name, hotel.unique_snippet, hotel.hotelphotos_set.first().image.url]) for hotel in context['object_list']]
+#         return context
      
 
 
