@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django.contrib.gis',
     'mapwidgets',
+    'storages'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -145,9 +146,6 @@ LOGIN_URL = 'login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-
-
-
 MAP_WIDGETS = {
     "GooglePointFieldWidget": (
         ("zoom", 7),
@@ -175,10 +173,18 @@ if os.getenv('SECRET_KEY'):
 
     import dj_database_url
     DATABASES = { 'default' : dj_database_url.config()}
-    DATABASES['default']['ENGINE'] = "django.contrib.gis.db.backends.postgis"
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+
 
 else: #Load local settings
     try:
         from .local_settings import *
     except ImportError:
         raise Exception('A local_settings.py file is required to run this project')
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
