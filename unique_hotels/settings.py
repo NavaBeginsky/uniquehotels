@@ -152,7 +152,7 @@ MAP_WIDGETS = {
         ("mapCenterLocation", [31.5699505, 34.5143476]),
         ("markerFitZoom", 12),
     ),
-    "GOOGLE_MAP_API_KEY": os.getenv('GOOGLE_API')
+    "GOOGLE_MAP_API_KEY": os.environ.get('GOOGLE_API')
 }
 
 # Add configuration for static files storage using whitenoise
