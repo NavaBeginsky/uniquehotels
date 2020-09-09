@@ -156,7 +156,7 @@ if os.getenv('SECRET_KEY'):
     #     "default": {
     #         "ENGINE": 'django.contrib.gis.db.backends.postgis',
     #     }
-    }
+    # }
 
 else:
     try:
